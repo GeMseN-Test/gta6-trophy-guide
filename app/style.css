@@ -1,0 +1,166 @@
+/* GTA VI Trophy Guide — dark, high-contrast, readable when shrunk to 768x480. */
+:root {
+  --bg: #0d1117;
+  --card: #161d27;
+  --card2: #1c2531;
+  --line: #2c3847;
+  --text: #e8eef4;
+  --muted: #9fb0c0;
+  --accent: #f5b301;
+  --accent-ink: #1a1400;
+  --green: #3fb950;
+  --red: #f85149;
+  --red-bg: #3d1215;
+  --platinum: #b9c4d0;
+  --gold: #f5b301;
+  --silver: #c0c8d0;
+  --bronze: #d08a4e;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.top { max-width: 1080px; margin: 0 auto; padding: 28px 20px 8px; }
+.kicker { color: var(--accent); font-size: 12px; letter-spacing: 2px; font-weight: 700; margin: 0 0 6px; }
+h1 { margin: 0 0 6px; font-size: 40px; line-height: 1.1; }
+.subtitle { color: var(--muted); margin: 0 0 10px; font-size: 17px; }
+
+main { max-width: 1080px; margin: 0 auto; padding: 0 20px 20px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; margin: 16px 0; }
+h2 { font-size: 20px; margin: 0 0 10px; }
+
+/* Progress card */
+.progress-card { display: flex; gap: 28px; flex-wrap: wrap; }
+.progress-big { flex: 1 1 280px; }
+.progress-count { font-size: 64px; font-weight: 800; line-height: 1; }
+.progress-count .of { font-size: 32px; color: var(--muted); font-weight: 600; }
+.progress-pct { font-size: 26px; font-weight: 700; color: var(--accent); margin-top: 4px; }
+.progress-bar { height: 14px; background: #0a0e13; border: 1px solid var(--line); border-radius: 8px; margin: 12px 0 8px; overflow: hidden; }
+.progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--green)); transition: width .3s; }
+.progress-note { color: var(--muted); margin: 0; }
+.progress-breakdowns { flex: 1 1 380px; display: flex; gap: 28px; flex-wrap: wrap; }
+.breakdown h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; }
+.breakdown ul { list-style: none; margin: 0; padding: 0; }
+.breakdown li { padding: 3px 0; font-size: 15px; }
+.breakdown li b { color: var(--accent); }
+.grade-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 7px; }
+.dot-platinum { background: var(--platinum); }
+.dot-gold { background: var(--gold); }
+.dot-silver { background: var(--silver); }
+.dot-bronze { background: var(--bronze); }
+
+/* Missable banner */
+.missable-banner {
+  background: var(--red-bg);
+  border: 2px solid var(--red);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+.missable-banner strong { color: #ffb3ae; font-size: 17px; }
+.missable-banner p { margin: 6px 0 0; }
+.banner-link a { color: #ffd7d5; font-weight: 700; }
+
+/* Toolbar */
+.toolbar .tool-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: end; margin-bottom: 10px; }
+.tool { display: flex; flex-direction: column; gap: 4px; font-size: 13px; font-weight: 700; color: var(--muted); }
+.tool input[type="search"], .tool select {
+  background: #0a0e13; color: var(--text); border: 1px solid var(--line);
+  border-radius: 8px; padding: 9px 10px; font-size: 15px; min-width: 180px;
+}
+.tool input[type="search"] { min-width: 240px; }
+.check-tool { flex-direction: row; align-items: center; gap: 8px; padding-bottom: 9px; font-size: 15px; color: var(--text); }
+.check-tool input { width: 20px; height: 20px; accent-color: var(--accent); }
+.check-tool .hint { color: var(--muted); font-weight: 400; font-size: 13px; }
+button {
+  background: var(--accent); color: var(--accent-ink); border: none; border-radius: 8px;
+  padding: 10px 16px; font-size: 15px; font-weight: 700; cursor: pointer;
+}
+button:hover { filter: brightness(1.1); }
+#btn-reset { background: #2c3847; color: var(--text); }
+#btn-sample { background: #2c3847; color: var(--text); }
+.tool-status { color: var(--green); font-size: 14px; align-self: center; }
+.toolbar-note { color: var(--muted); font-size: 13px; margin: 4px 0 0; }
+
+/* Roadmap */
+body.cover-view #roadmap { display: none; }
+/* Cover view: same app, tightened so the progress card, missable banner,
+   toolbar and the checklist with one open guide fit in one 1280x800 frame. */
+body.cover-view .top { padding: 12px 20px 2px; }
+body.cover-view h1 { font-size: 30px; margin-bottom: 2px; }
+body.cover-view .subtitle { display: none; }
+body.cover-view .card { padding: 12px 16px; margin: 10px 0; }
+body.cover-view .progress-count { font-size: 44px; display: inline-block; }
+body.cover-view .progress-pct { display: inline-block; margin: 0 0 0 12px; vertical-align: baseline; }
+body.cover-view .progress-bar { margin: 8px 0 4px; }
+body.cover-view .breakdown li { padding: 1px 0; font-size: 14px; }
+body.cover-view #grade-counts { display: flex; flex-wrap: wrap; gap: 2px 16px; }
+body.cover-view #stage-counts { columns: 2; column-gap: 24px; }
+body.cover-view .missable-banner { padding: 10px 16px; }
+body.cover-view .missable-banner p { margin: 3px 0 0; font-size: 14px; }
+body.cover-view .banner-detail { display: none; }
+body.cover-view .stage-breakdown { display: none; }
+body.cover-view .toolbar .tool-row { margin-bottom: 6px; }
+body.cover-view .tool input[type="search"] { min-width: 160px; }
+body.cover-view .check-tool .hint { display: none; }
+body.cover-view .toolbar-note { display: none; }
+body.cover-view #btn-sample { display: none; }
+body.cover-view .list-head { margin: 10px 0 6px; }
+body.cover-view .trophy { padding: 10px 12px; margin-bottom: 8px; }
+body.cover-view .guide { margin-top: 8px; padding-top: 8px; }
+.roadmap-intro { color: var(--muted); margin: 0 0 12px; }
+.stages { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; counter-reset: stage; }
+.stages li { background: var(--card2); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+.stages li h3 { margin: 0 0 4px; font-size: 16px; }
+.stages li h3 .stage-num { color: var(--accent); }
+.stages li p { margin: 0 0 6px; color: var(--muted); font-size: 14px; }
+.stages li .stage-count { font-weight: 700; color: var(--text); font-size: 14px; }
+
+/* Trophy list */
+.list-head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin: 20px 0 8px; }
+.list-head h2 { margin: 0; }
+.list-head p { color: var(--muted); margin: 0; }
+.trophy-list { list-style: none; margin: 0; padding: 0; }
+.trophy { background: var(--card); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 10px; padding: 12px 14px; }
+.trophy.earned { border-color: var(--green); }
+.trophy-row { display: flex; gap: 12px; align-items: flex-start; }
+.trophy-check { width: 24px; height: 24px; margin-top: 2px; accent-color: var(--green); flex: none; cursor: pointer; }
+.trophy-main { flex: 1; min-width: 0; }
+.trophy-name { font-size: 17px; font-weight: 700; margin: 0; }
+.trophy.earned .trophy-name { color: var(--green); }
+.trophy-desc { color: var(--muted); margin: 2px 0 6px; font-size: 14px; }
+.trophy-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag { font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 20px; background: #0a0e13; border: 1px solid var(--line); color: var(--muted); text-transform: capitalize; }
+.tag.grade-platinum { color: #111; background: var(--platinum); border-color: var(--platinum); }
+.tag.grade-gold { color: #111; background: var(--gold); border-color: var(--gold); }
+.tag.grade-silver { color: #111; background: var(--silver); border-color: var(--silver); }
+.tag.grade-bronze { color: #111; background: var(--bronze); border-color: var(--bronze); }
+.tag.missable { background: var(--red); border-color: var(--red); color: #fff; }
+.tag.spoiler-tag { border-color: var(--accent); color: var(--accent); }
+.guide-btn { background: #2c3847; color: var(--text); padding: 8px 12px; font-size: 14px; flex: none; }
+.guide { border-top: 1px solid var(--line); margin-top: 12px; padding-top: 12px; }
+.guide h3 { font-size: 15px; margin: 0 0 6px; color: var(--accent); }
+.guide p { margin: 0 0 10px; font-size: 15px; }
+.guide .sources { font-size: 13px; color: var(--muted); }
+.guide .sources a { color: #8fc7ff; }
+.guide .sources ul { margin: 4px 0 0; padding-left: 18px; }
+.hidden-name { color: var(--muted); font-style: italic; }
+.empty-note { color: var(--muted); }
+
+/* Honesty + footer */
+.honesty p { color: var(--muted); font-size: 14px; }
+footer { max-width: 1080px; margin: 0 auto; padding: 0 20px 28px; color: var(--muted); font-size: 13px; }
+a { color: #8fc7ff; }
+
+@media (max-width: 640px) {
+  h1 { font-size: 30px; }
+  .progress-count { font-size: 48px; }
+  .tool input[type="search"] { min-width: 0; width: 100%; }
+}

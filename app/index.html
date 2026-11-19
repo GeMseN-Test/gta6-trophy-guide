@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GTA VI Trophy Guide — 55 trophies, 7-stage platinum roadmap</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <p class="kicker">GRAND THEFT AUTO VI &middot; PLAYSTATION 5 &middot; UNOFFICIAL FAN GUIDE</p>
+  <h1>GTA VI Trophy Guide</h1>
+  <p class="subtitle">55 trophies, 7-stage platinum roadmap &mdash; one playthrough, ~200 hours, difficulty 4/10. Works fully offline: your progress lives in this browser only.</p>
+</header>
+
+<main>
+  <section class="card progress-card" id="progress" aria-label="Progress">
+    <div class="progress-big">
+      <div class="progress-count"><span id="earned-count">0</span><span class="of">/55</span></div>
+      <div class="progress-pct" id="earned-pct">0%</div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <p class="progress-note" id="progress-note">0 of 55 trophies earned</p>
+    </div>
+    <div class="progress-breakdowns">
+      <div class="breakdown">
+        <h2>By grade</h2>
+        <ul id="grade-counts"></ul>
+      </div>
+      <div class="breakdown stage-breakdown">
+        <h2>By roadmap stage</h2>
+        <ul id="stage-counts"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="missable-banner" id="missable-banner" aria-label="Missable trophy warning">
+    <strong>&#9888; MISSABLE &mdash; do this in Chapter 1</strong>
+    <p class="banner-main">Only one trophy can be missed: <strong>Positive Mental Attitude</strong> &mdash; meditate at every spot across Leonida.</p>
+    <p class="banner-detail">Do it in Chapter 1, keep a Chapter 1 save, no replay, no New Game+, no cheats. Every other trophy can be earned after the story.</p>
+    <p class="banner-link"><a href="#trophy-28">Jump to the guide &darr;</a></p>
+  </section>
+
+  <section class="toolbar card" aria-label="Tracker tools">
+    <div class="tool-row">
+      <label class="tool">Search
+        <input type="search" id="search" placeholder="Search a trophy name&hellip;" autocomplete="off">
+      </label>
+      <label class="tool">Grade
+        <select id="filter-grade">
+          <option value="all">All grades</option>
+          <option value="platinum">Platinum</option>
+          <option value="gold">Gold</option>
+          <option value="silver">Silver</option>
+          <option value="bronze">Bronze</option>
+        </select>
+      </label>
+      <label class="tool">Kind
+        <select id="filter-category">
+          <option value="all">All kinds</option>
+          <option value="story">Story</option>
+          <option value="missable">Missable</option>
+          <option value="collectibles">Collectibles</option>
+          <option value="activities">Activities</option>
+          <option value="online">Online</option>
+        </select>
+      </label>
+      <label class="tool check-tool"><input type="checkbox" id="spoiler-toggle"> Spoiler-safe mode <span class="hint">(hides story trophies until earned)</span></label>
+    </div>
+    <div class="tool-row">
+      <button type="button" id="btn-export">Export progress (.json)</button>
+      <button type="button" id="btn-import">Import progress</button>
+      <input type="file" id="import-file" accept="application/json,.json" hidden>
+      <button type="button" id="btn-sample">Load sample progress (13/55)</button>
+      <button type="button" id="btn-reset">Reset progress</button>
+      <span class="tool-status" id="tool-status" role="status"></span>
+    </div>
+    <p class="toolbar-note">Progress is saved in this browser (localStorage). Export downloads a .json file; import reads that file back. Nothing leaves your computer.</p>
+  </section>
+
+  <section class="card roadmap" id="roadmap" aria-label="Roadmap to the platinum">
+    <h2>Roadmap to the Platinum &mdash; 7 stages</h2>
+    <p class="roadmap-intro">One playthrough, ~200 hours, difficulty 4/10. Work the stages in order; the counts below come from the same checklist as the progress card above, so they always agree.</p>
+    <ol class="stages" id="stages"></ol>
+  </section>
+
+  <section aria-label="Trophy checklist">
+    <div class="list-head">
+      <h2>Trophy checklist</h2>
+      <p id="list-count" role="status"></p>
+    </div>
+    <ul class="trophy-list" id="trophy-list"></ul>
+    <p class="empty-note" id="empty-note" hidden>No trophies match these filters. Clear the search or pick another grade or kind.</p>
+  </section>
+
+  <section class="card honesty" id="sources-honesty" aria-label="Sources and honesty">
+    <h2>Sources &amp; honesty</h2>
+    <p>Trophy names, descriptions and grades are shown as PlayStation publishes them. Every guide is written in our own words for this page; each one names where its facts come from (PowerPyx, GTABase, PSNProfiles, Exophase) beside the guide, and never copies their text.</p>
+    <p>Grand Theft Auto VI is not out yet at the time of writing, so some steps (exact map spots, counts, unlock order) come from the official trophy descriptions and the cited guides, not from playing the game. Where a step is not verified, the guide says so instead of guessing. Check the linked source before you trust a detail that matters.</p>
+    <p>This is an unofficial fan guide. Not affiliated with Rockstar Games, Take-Two Interactive, Sony or PlayStation. No Rockstar logo, artwork or game screenshots are used here.</p>
+  </section>
+</main>
+
+<footer>
+  <p>GTA VI Trophy Guide &mdash; 55 trophies &middot; 7-stage platinum roadmap &middot; offline, no account, no network.</p>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
