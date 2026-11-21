@@ -1,51 +1,37 @@
-# GTA 6 Trophy Guide & Tracker — 55 trophies, 7-stage platinum roadmap
-
 [![GTA 6 Trophy Guide](https://make.fun/badge/gta6-trophy-guide-01.svg)](https://make.fun/bounty/gta6-trophy-guide-01)
-[![Guide](https://make.fun/badge/gta6-trophy-guide-01/GeMseN-Test/gta6-trophy-guide.svg)](https://make.fun/bounty/gta6-trophy-guide-01)
+[![Leonida Ledger](https://make.fun/badge/gta6-trophy-guide-01/GeMseN-Test/gta6-trophy-guide.svg)](https://make.fun/bounty/gta6-trophy-guide-01)
 [![Rank](https://make.fun/badge/gta6-trophy-guide-01/GeMseN-Test/gta6-trophy-guide/rank.svg)](https://make.fun/bounty/gta6-trophy-guide-01)
 [![Reward](https://make.fun/badge/gta6-trophy-guide-01/GeMseN-Test/gta6-trophy-guide/reward.svg)](https://make.fun/bounty/gta6-trophy-guide-01)
 
-An offline web app that is the complete guide and tracker for all **55 PlayStation 5 trophies** in Grand Theft Auto VI — one playthrough, about 200 hours, difficulty 4/10. Open it in a desktop browser and it works with no internet connection.
+# LEONIDA LEDGER — GTA VI trophy guide: 55/55 cited guides, 200 cited steps, 12 sources, 7-stage roadmap
+
+An offline guide & tracker for all **55 official PlayStation 5 trophies** of Grand Theft Auto VI (1 platinum, 2 gold, 6 silver, 46 bronze, 28 hidden on PSN). Open `app/index.html` in a desktop browser — no network needed, progress saves in the browser.
 
 ## What it does
 
-- **All 55 trophies** with their official name, official description, and grade: 1 platinum, 2 gold, 6 silver, 46 bronze.
-- **Big progress card** at the top: how many you have (e.g. 13/55), the percentage, and counts per grade and per stage.
-- **Checklist saved in your browser** — tick trophies off and your progress is still there when you come back.
-- **Export and import progress** — back up your checklist as a file, or move it to another computer.
-- **Filter by type** — story, collectible, combat, driving, money, exploration, or misc.
-- **Spoiler settings** — story trophies stay hidden until you earn them, so the guide never spoils the story.
-- **7-stage platinum roadmap** — one playthrough in 7 stages, from the opening chapters to cleanup, about 200 hours in total.
-- **1 missable trophy, clearly flagged** — a red MISSABLE banner on Positive Mental Attitude (meditate at every spot across Leonida). Do it in Chapter 1 and keep a Chapter 1 save: there is no mission replay and no New Game+.
-- **A guide for every trophy**, written in our own words, quoting the official description and citing PowerPyx and GTABase as sources.
+- **Tracker** — checklist of all 55 trophies with official names, descriptions and grades; progress saves in localStorage, with **Export / Import** of progress as JSON.
+- **200 cited steps, 200 backed by 2+ sources** — every guide step names its sources by number ([1] PlayStation, [2] PowerPyx, [5] GTABase…). **18,346 guide chars**, all in our own words; nothing copied from any guide.
+- **Audit strip** — 55/55 official, claims cited, backed-by-2+ counts, sources and read date, all computed live from the data.
+- **Roadmap to platinum** — 7 stages, one playthrough, about 200 hours, difficulty 4/10, with live per-stage counts.
+- **Missables** — 1 possibly missable trophy (**Positive Mental Attitude**, Chapter 1 balcony meditation) with a red banner, plus 4 at-risk chapter-window trophies. Where sources disagree, the guide shows **both versions and our call** (3 disputes).
+- **Counters** — per-trophy counters for everything the game counts (18 meditations, 250 stunts, 42 shooting-range golds, 100 vehicles, 52 areas, 100 WAiNK spots…), saved in the browser.
+- **Filters & spoiler shield** — filter by kind (story, strangers, collectibles, activities, robbery, exploration, misc), grade, earned-only and search; the spoiler shield hides hidden story trophies until earned.
+- **Sources & honesty** — a source matrix with claims per source, and an honest note on what is confirmed vs. disputed.
 
-## How to run it (offline)
+## Run it
 
-```bash
-node serve.ts
+```sh
+node serve.ts        # serves app/ on http://localhost:8080
 ```
 
-Then open <http://localhost:8080> in your desktop browser. No internet needed — everything is static files.
+Build the submission dossier:
 
-## How to build it
-
-```bash
-MAKEFUN_OUTPUT_DIR=out node main.ts
+```sh
+mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 ```
 
-## Sources & honesty
+## Sources
 
-- Trophy **names, descriptions, and grades** come from the official 55-trophy list (the list published at launch on 18 November 2026, as included in the competition kit and confirmed against PowerPyx and GTABase, which all report the same 55 names and grades).
-- The **guides are written by us, in our own words**. They quote the official description of each trophy and cite PowerPyx ([GTA 6 Trophy Guide](https://www.powerpyx.com/gta-6-grand-theft-auto-vi-trophy-guide-roadmap/)) and GTABase ([GTA 6 Trophies](https://www.gtabase.com/articles/gta-6/gta-6-achievements-trophies-list-ps5-xbox-series)) as sources. Nothing in the guides is copied from those pages.
-- **One missable trophy, verified from the official description and the guides:** Positive Mental Attitude — meditate at every spot across Leonida. PowerPyx and GTABase both flag it as the only trophy that may be missable: the first meditation spot is offered in Chapter 1 (at Jason's house and on Lucia's balcony) and is gone once Chapter 1 ends. Every other trophy can be finished in free roam after the story. We claim no other trophy as missable.
-- Roadmap numbers (about 200 hours, difficulty 4/10, one playthrough, no mission replay, cheats disable trophies) follow PowerPyx's published roadmap.
+PowerPyx, GTABase, PSNProfiles, Exophase, IGN, KeenGamer, GTA Wiki, Push Square, TrueTrophies and the official PlayStation trophy list — named beside every guide step. See the **Sources** tab in the app for the full matrix.
 
-## Bounty
-
-Built for the [make.fun bounty "gta6-trophy-guide-01"](https://make.fun/bounty/gta6-trophy-guide-01) — "Build the best GTA 6 trophy guide". $250 prize pool, top 50.
-
-Joined make.fun with referral code `5c2wyg2x`.
-
-## License
-
-MIT — see [LICENSE](LICENSE).
+Fan-made guide, not affiliated with Rockstar Games or PlayStation. Built for the [make.fun GTA 6 trophy guide bounty](https://make.fun/bounty/gta6-trophy-guide-01) — referral `5c2wyg2x`.

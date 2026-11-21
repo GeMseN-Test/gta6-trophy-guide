@@ -3,107 +3,120 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GTA VI Trophy Guide — 55 trophies, 7-stage platinum roadmap</title>
+<title>Leonida Ledger — GTA VI trophy guide &amp; tracker</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="top">
-  <p class="kicker">GRAND THEFT AUTO VI &middot; PLAYSTATION 5 &middot; UNOFFICIAL FAN GUIDE</p>
-  <h1>GTA VI Trophy Guide</h1>
-  <p class="subtitle">55 trophies, 7-stage platinum roadmap &mdash; one playthrough, ~200 hours, difficulty 4/10. Works fully offline: your progress lives in this browser only.</p>
+  <div class="brand">
+    <div class="mark" aria-hidden="true">LL</div>
+    <div>
+      <h1>LEONIDA LEDGER</h1>
+      <p class="sub">GTA VI trophy guide &amp; tracker — all 55 official PlayStation 5 trophies, every step cited · read 21 Nov 2026</p>
+    </div>
+  </div>
+  <div class="progress-card" id="progressCard">
+    <div class="big"><span id="earnedCount">0</span><span class="of">/55</span> <span class="earned-word">earned</span></div>
+    <div class="grade-line" id="gradeLine">P 0/1 · G 0/2 · S 0/6 · B 0/46</div>
+    <div class="bar"><div class="fill" id="progressFill" style="width:0%"></div></div>
+    <div class="platinum-line" id="platinumLine">0% to the platinum</div>
+  </div>
+  <div class="top-actions">
+    <button id="spoilerBtn" type="button" class="toggle on" aria-pressed="true">Spoiler shield: ON</button>
+    <button id="exportBtn" type="button">Export</button>
+    <button id="importBtn" type="button">Import</button>
+    <input id="importFile" type="file" accept="application/json" hidden>
+    <div class="saved" id="savedNote">✓ Saved in this browser</div>
+  </div>
 </header>
 
-<main>
-  <section class="card progress-card" id="progress" aria-label="Progress">
-    <div class="progress-big">
-      <div class="progress-count"><span id="earned-count">0</span><span class="of">/55</span></div>
-      <div class="progress-pct" id="earned-pct">0%</div>
-      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-      <p class="progress-note" id="progress-note">0 of 55 trophies earned</p>
-    </div>
-    <div class="progress-breakdowns">
-      <div class="breakdown">
-        <h2>By grade</h2>
-        <ul id="grade-counts"></ul>
+<section class="audit" id="auditStrip" aria-label="Audit"></section>
+
+<nav class="tabs" id="tabs">
+  <button type="button" data-tab="tracker" class="active">Tracker</button>
+  <button type="button" data-tab="roadmap">Roadmap</button>
+  <button type="button" data-tab="missables">Missables <span class="pill" id="missablePill">1</span></button>
+  <button type="button" data-tab="sources">Sources</button>
+</nav>
+
+<section class="toolbar" id="toolbar">
+  <div class="chips" id="kindChips"></div>
+  <div class="tools">
+    <input id="search" type="search" placeholder="Search 55 trophies, missions, counts…" aria-label="Search trophies">
+    <select id="gradeFilter" aria-label="Filter by grade">
+      <option value="all">All grades</option>
+      <option value="platinum">Platinum</option>
+      <option value="gold">Gold</option>
+      <option value="silver">Silver</option>
+      <option value="bronze">Bronze</option>
+    </select>
+    <select id="sortSel" aria-label="Sort trophies">
+      <option value="roadmap">Roadmap order</option>
+      <option value="name">Name A–Z</option>
+      <option value="grade">Grade (P → B)</option>
+    </select>
+    <label class="check"><input id="earnedOnly" type="checkbox"> Earned only</label>
+    <button id="demoBtn" type="button">Demo</button>
+    <button id="resetBtn" type="button">Reset</button>
+  </div>
+</section>
+
+<main id="tab-tracker" class="tabpage active">
+  <div class="columns">
+    <aside class="list-col">
+      <div class="list-head"><span id="shownCount">55 shown</span><span id="listNote"></span></div>
+      <ul id="trophyList" class="trophy-list"></ul>
+    </aside>
+    <section class="detail-col" id="detailCol" aria-live="polite"></section>
+    <aside class="side-col">
+      <div class="card">
+        <h2>NEXT UP — ROADMAP ORDER</h2>
+        <ol id="nextUp" class="nextup"></ol>
+        <p class="fine"><a href="#" id="fullRoadmapLink">Full roadmap →</a></p>
       </div>
-      <div class="breakdown stage-breakdown">
-        <h2>By roadmap stage</h2>
-        <ul id="stage-counts"></ul>
+      <div class="card">
+        <h2>SOURCES FOR THIS GUIDE</h2>
+        <ol id="detailSources" class="src-list"></ol>
       </div>
-    </div>
-  </section>
-
-  <section class="missable-banner" id="missable-banner" aria-label="Missable trophy warning">
-    <strong>&#9888; MISSABLE &mdash; do this in Chapter 1</strong>
-    <p class="banner-main">Only one trophy can be missed: <strong>Positive Mental Attitude</strong> &mdash; meditate at every spot across Leonida.</p>
-    <p class="banner-detail">Do it in Chapter 1, keep a Chapter 1 save, no replay, no New Game+, no cheats. Every other trophy can be earned after the story.</p>
-    <p class="banner-link"><a href="#trophy-28">Jump to the guide &darr;</a></p>
-  </section>
-
-  <section class="toolbar card" aria-label="Tracker tools">
-    <div class="tool-row">
-      <label class="tool">Search
-        <input type="search" id="search" placeholder="Search a trophy name&hellip;" autocomplete="off">
-      </label>
-      <label class="tool">Grade
-        <select id="filter-grade">
-          <option value="all">All grades</option>
-          <option value="platinum">Platinum</option>
-          <option value="gold">Gold</option>
-          <option value="silver">Silver</option>
-          <option value="bronze">Bronze</option>
-        </select>
-      </label>
-      <label class="tool">Kind
-        <select id="filter-category">
-          <option value="all">All kinds</option>
-          <option value="story">Story</option>
-          <option value="missable">Missable</option>
-          <option value="collectibles">Collectibles</option>
-          <option value="activities">Activities</option>
-          <option value="online">Online</option>
-        </select>
-      </label>
-      <label class="tool check-tool"><input type="checkbox" id="spoiler-toggle"> Spoiler-safe mode <span class="hint">(hides story trophies until earned)</span></label>
-    </div>
-    <div class="tool-row">
-      <button type="button" id="btn-export">Export progress (.json)</button>
-      <button type="button" id="btn-import">Import progress</button>
-      <input type="file" id="import-file" accept="application/json,.json" hidden>
-      <button type="button" id="btn-sample">Load sample progress (13/55)</button>
-      <button type="button" id="btn-reset">Reset progress</button>
-      <span class="tool-status" id="tool-status" role="status"></span>
-    </div>
-    <p class="toolbar-note">Progress is saved in this browser (localStorage). Export downloads a .json file; import reads that file back. Nothing leaves your computer.</p>
-  </section>
-
-  <section class="card roadmap" id="roadmap" aria-label="Roadmap to the platinum">
-    <h2>Roadmap to the Platinum &mdash; 7 stages</h2>
-    <p class="roadmap-intro">One playthrough, ~200 hours, difficulty 4/10. Work the stages in order; the counts below come from the same checklist as the progress card above, so they always agree.</p>
-    <ol class="stages" id="stages"></ol>
-  </section>
-
-  <section aria-label="Trophy checklist">
-    <div class="list-head">
-      <h2>Trophy checklist</h2>
-      <p id="list-count" role="status"></p>
-    </div>
-    <ul class="trophy-list" id="trophy-list"></ul>
-    <p class="empty-note" id="empty-note" hidden>No trophies match these filters. Clear the search or pick another grade or kind.</p>
-  </section>
-
-  <section class="card honesty" id="sources-honesty" aria-label="Sources and honesty">
-    <h2>Sources &amp; honesty</h2>
-    <p>Trophy names, descriptions and grades are shown as PlayStation publishes them. Every guide is written in our own words for this page; each one names where its facts come from (PowerPyx, GTABase, PSNProfiles, Exophase) beside the guide, and never copies their text.</p>
-    <p>Grand Theft Auto VI is not out yet at the time of writing, so some steps (exact map spots, counts, unlock order) come from the official trophy descriptions and the cited guides, not from playing the game. Where a step is not verified, the guide says so instead of guessing. Check the linked source before you trust a detail that matters.</p>
-    <p>This is an unofficial fan guide. Not affiliated with Rockstar Games, Take-Two Interactive, Sony or PlayStation. No Rockstar logo, artwork or game screenshots are used here.</p>
-  </section>
+    </aside>
+  </div>
 </main>
 
-<footer>
-  <p>GTA VI Trophy Guide &mdash; 55 trophies &middot; 7-stage platinum roadmap &middot; offline, no account, no network.</p>
-</footer>
+<main id="tab-roadmap" class="tabpage">
+  <div class="roadmap-head">
+    <h2>ROADMAP TO PLATINUM</h2>
+    <p>One playthrough, about 200 hours, difficulty 4/10. Stages run in order; the counts below are live from your checklist.</p>
+  </div>
+  <div id="roadmapStages" class="stages"></div>
+</main>
 
+<main id="tab-missables" class="tabpage">
+  <div id="missableCards" class="missables"></div>
+  <div class="card disputes">
+    <h2>SOURCES DIFFER — DISPUTES SHOWN BOTH WAYS</h2>
+    <div id="disputeList"></div>
+  </div>
+</main>
+
+<main id="tab-sources" class="tabpage">
+  <div class="card">
+    <h2>SOURCES &amp; HONESTY</h2>
+    <p>Every guide step in this ledger names its sources by number — <strong>[2]</strong> means PowerPyx, and so on. No guide text is copied from any source: the words are ours, the facts are cited. Trophy names and descriptions are shown exactly as PlayStation publishes them.</p>
+    <p>Hidden flags are our call from the official descriptions: story spoilers stay hidden until earned. Counts (18 meditations, 250 stunts, 42 shooting-range challenges, 100 vehicles, 52 areas) come from the official descriptions and the cited guides; where guides disagree, the Missables tab shows both sides and our call.</p>
+    <p class="fine">Sources read 21 Nov 2026. This guide is fan-made, offline, and not affiliated with Rockstar Games or PlayStation.</p>
+  </div>
+  <div class="card">
+    <h2>SOURCE MATRIX — CLAIMS PER SOURCE</h2>
+    <table class="matrix" id="sourceMatrix">
+      <thead><tr><th>#</th><th>Source</th><th>Guide</th><th>Claims cited</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</main>
+
+<footer class="foot">
+  <p>Leonida Ledger — fan-made GTA VI trophy guide &amp; tracker. Works offline; progress saves in this browser only. Trophy names &amp; descriptions © PlayStation / Rockstar Games, shown as published.</p>
+</footer>
 <script type="module" src="app.js"></script>
 </body>
 </html>

@@ -1,20 +1,19 @@
-// Tiny static server for the GTA VI trophy guide (Node 22, standard library
-// only). Serves app/ on http://localhost:8080 so the guide can be tried in a
-// desktop browser and screenshotted: `node serve.ts` (or `--port <n>`).
-// Refuses any path outside app/; this is a local dev convenience, not a
-// server for the internet.
+// Leonida Ledger — tiny static server for app/ (Node 22, standard library only).
+// Development convenience, not a web server: `node serve.ts` serves app/ on
+// http://localhost:8080 (`--port <n>` for another port). It sends the MIME types a
+// browser needs, refuses any path outside app/, and does nothing else clever.
 import { createReadStream, statSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { extname, join, normalize, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const root = resolve(fileURLToPath(new URL('./app', import.meta.url)));
-const args = process.argv.slice(2);
-const portIndex = args.indexOf('--port');
-const requested = portIndex === -1 ? 8080 : Number(args[portIndex + 1]);
-const port = Number.isInteger(requested) && requested > 0 && requested < 65536 ? requested : 8080;
+const appRoot = resolve(fileURLToPath(new URL('./app', import.meta.url)));
+const argv = process.argv.slice(2);
+const portArg = argv.indexOf('--port');
+const wanted = portArg === -1 ? 8080 : Number(argv[portArg + 1]);
+const port = Number.isInteger(wanted) && wanted > 0 && wanted < 65536 ? wanted : 8080;
 
-const MIME = {
+const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8',
   '.mjs': 'text/javascript; charset=utf-8',
@@ -26,9 +25,10 @@ const MIME = {
   '.jpeg': 'image/jpeg',
   '.webp': 'image/webp',
   '.ico': 'image/x-icon',
+  '.woff2': 'font/woff2',
 };
 
-createServer((request, response) => {
+function serveFile(request, response) {
   const url = new URL(request.url ?? '/', 'http://localhost');
   let pathname;
   try {
@@ -38,8 +38,8 @@ createServer((request, response) => {
     return;
   }
   if (pathname.endsWith('/')) pathname += 'index.html';
-  const file = resolve(join(root, normalize(pathname)));
-  if (file !== root && !file.startsWith(root + sep)) {
+  const file = resolve(join(appRoot, normalize(pathname)));
+  if (file !== appRoot && !file.startsWith(appRoot + sep)) {
     response.writeHead(403).end('forbidden');
     return;
   }
@@ -53,11 +53,13 @@ createServer((request, response) => {
     return;
   }
   response.writeHead(200, {
-    'content-type': MIME[extname(file).toLowerCase()] ?? 'application/octet-stream',
+    'content-type': MIME_TYPES[extname(file).toLowerCase()] ?? 'application/octet-stream',
     'content-length': size,
     'cache-control': 'no-store',
   });
   createReadStream(file).pipe(response);
-}).listen(port, '127.0.0.1', () => {
-  console.log(`GTA VI trophy guide on http://localhost:${port}`);
+}
+
+createServer(serveFile).listen(port, '127.0.0.1', () => {
+  console.log(`Leonida Ledger app/ is on http://localhost:${port}`);
 });
