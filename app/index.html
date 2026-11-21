@@ -1,122 +1,117 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Leonida Ledger — GTA VI trophy guide &amp; tracker</title>
+<title>Leonida Ledger — GTA VI Trophy Guide &amp; Tracker</title>
 <link rel="stylesheet" href="style.css">
+<script type="module" src="app.js"></script>
 </head>
 <body>
 <header class="top">
   <div class="brand">
-    <div class="mark" aria-hidden="true">LL</div>
+    <span class="mark" aria-hidden="true">LL</span>
     <div>
-      <h1>LEONIDA LEDGER</h1>
-      <p class="sub">GTA VI trophy guide &amp; tracker — all 55 official PlayStation 5 trophies, every step cited · read 21 Nov 2026</p>
+      <h1>Leonida Ledger</h1>
+      <p class="sub">GTA VI &middot; PS5 &middot; 55 trophies &middot; every step cited &middot; read 21 Nov 2026</p>
     </div>
   </div>
-  <div class="progress-card" id="progressCard">
-    <div class="big"><span id="earnedCount">0</span><span class="of">/55</span> <span class="earned-word">earned</span></div>
-    <div class="grade-line" id="gradeLine">P 0/1 · G 0/2 · S 0/6 · B 0/46</div>
-    <div class="bar"><div class="fill" id="progressFill" style="width:0%"></div></div>
-    <div class="platinum-line" id="platinumLine">0% to the platinum</div>
+  <div class="progress-card" id="progress-card" aria-live="polite">
+    <div class="big"><span id="earned-count">0</span><span class="of">/55 earned</span></div>
+    <p class="pct" id="pct-line">0% to the platinum</p>
+    <div class="bar" role="progressbar" aria-label="progress to platinum"><div id="bar-fill"></div></div>
+    <p class="grades" id="grade-line">P 0/1 &middot; G 0/2 &middot; S 0/6 &middot; B 0/46</p>
   </div>
   <div class="top-actions">
-    <button id="spoilerBtn" type="button" class="toggle on" aria-pressed="true">Spoiler shield: ON</button>
-    <button id="exportBtn" type="button">Export</button>
-    <button id="importBtn" type="button">Import</button>
-    <input id="importFile" type="file" accept="application/json" hidden>
-    <div class="saved" id="savedNote">✓ Saved in this browser</div>
+    <label class="shield"><input type="checkbox" id="spoiler-toggle" checked> Spoiler shield</label>
+    <button type="button" id="export-btn">Export</button>
+    <button type="button" id="import-btn">Import</button>
+    <input type="file" id="import-file" accept="application/json,.json" hidden>
+    <span class="saved" id="saved-note">&#10003; Saved in this browser</span>
   </div>
 </header>
 
-<section class="audit" id="auditStrip" aria-label="Audit"></section>
+<p class="audit" id="audit-strip">Loading the ledger&hellip;</p>
 
-<nav class="tabs" id="tabs">
-  <button type="button" data-tab="tracker" class="active">Tracker</button>
-  <button type="button" data-tab="roadmap">Roadmap</button>
-  <button type="button" data-tab="missables">Missables <span class="pill" id="missablePill">1</span></button>
-  <button type="button" data-tab="sources">Sources</button>
+<nav class="tabs" role="tablist" aria-label="Guide sections">
+  <button type="button" role="tab" data-view="tracker" class="active">Tracker</button>
+  <button type="button" role="tab" data-view="roadmap">Roadmap</button>
+  <button type="button" role="tab" data-view="missables">Missables <span class="badge" id="missable-badge">1</span></button>
+  <button type="button" role="tab" data-view="sources">Sources</button>
 </nav>
 
-<section class="toolbar" id="toolbar">
-  <div class="chips" id="kindChips"></div>
-  <div class="tools">
-    <input id="search" type="search" placeholder="Search 55 trophies, missions, counts…" aria-label="Search trophies">
-    <select id="gradeFilter" aria-label="Filter by grade">
-      <option value="all">All grades</option>
-      <option value="platinum">Platinum</option>
-      <option value="gold">Gold</option>
-      <option value="silver">Silver</option>
-      <option value="bronze">Bronze</option>
-    </select>
-    <select id="sortSel" aria-label="Sort trophies">
-      <option value="roadmap">Roadmap order</option>
-      <option value="name">Name A–Z</option>
-      <option value="grade">Grade (P → B)</option>
-    </select>
-    <label class="check"><input id="earnedOnly" type="checkbox"> Earned only</label>
-    <button id="demoBtn" type="button">Demo</button>
-    <button id="resetBtn" type="button">Reset</button>
+<section id="view-tracker" class="view">
+  <div class="toolbar">
+    <div class="chips" id="kind-chips"></div>
+    <div class="tools">
+      <input type="search" id="search" placeholder="Search name, mission, count&hellip;" aria-label="Search trophies">
+      <select id="grade-filter" aria-label="Filter by grade">
+        <option value="all">All grades</option>
+        <option value="platinum">Platinum</option>
+        <option value="gold">Gold</option>
+        <option value="silver">Silver</option>
+        <option value="bronze">Bronze</option>
+      </select>
+      <select id="sort" aria-label="Sort trophies">
+        <option value="roadmap">Roadmap order</option>
+        <option value="id">Trophy number</option>
+        <option value="name">Name A&ndash;Z</option>
+        <option value="grade">Grade</option>
+      </select>
+      <label class="check"><input type="checkbox" id="earned-only"> Earned only</label>
+      <button type="button" id="demo-btn">Demo</button>
+      <button type="button" id="reset-btn">Reset</button>
+    </div>
+    <p class="shown" id="shown-count"></p>
+  </div>
+  <div class="ledger">
+    <div class="col list-col" id="trophy-list" role="list"></div>
+    <div class="col detail-col" id="trophy-detail"></div>
+    <div class="col rail-col">
+      <section class="panel" id="next-up-panel">
+        <h2>Next up &mdash; roadmap order</h2>
+        <ol id="next-up"></ol>
+        <p><a href="#" id="full-roadmap-link">Full roadmap &rarr;</a></p>
+      </section>
+      <section class="panel" id="rail-sources-panel">
+        <h2>Sources for this guide</h2>
+        <ol id="rail-sources"></ol>
+        <p><a href="#" id="all-sources-link">All sources &amp; honesty &rarr;</a></p>
+      </section>
+    </div>
   </div>
 </section>
 
-<main id="tab-tracker" class="tabpage active">
-  <div class="columns">
-    <aside class="list-col">
-      <div class="list-head"><span id="shownCount">55 shown</span><span id="listNote"></span></div>
-      <ul id="trophyList" class="trophy-list"></ul>
-    </aside>
-    <section class="detail-col" id="detailCol" aria-live="polite"></section>
-    <aside class="side-col">
-      <div class="card">
-        <h2>NEXT UP — ROADMAP ORDER</h2>
-        <ol id="nextUp" class="nextup"></ol>
-        <p class="fine"><a href="#" id="fullRoadmapLink">Full roadmap →</a></p>
-      </div>
-      <div class="card">
-        <h2>SOURCES FOR THIS GUIDE</h2>
-        <ol id="detailSources" class="src-list"></ol>
-      </div>
-    </aside>
-  </div>
-</main>
+<section id="view-roadmap" class="view" hidden>
+  <h2>Roadmap to the platinum</h2>
+  <p class="lede">One playthrough, about 200 hours, difficulty 4/10. Story first, stranger strands while they are open, the one possibly missable trophy in Chapter 1, then activities, collectibles and money, and the 100% checklist last. Each stage card shows how many of its trophies you have earned.</p>
+  <div class="stages" id="stage-cards"></div>
+</section>
 
-<main id="tab-roadmap" class="tabpage">
-  <div class="roadmap-head">
-    <h2>ROADMAP TO PLATINUM</h2>
-    <p>One playthrough, about 200 hours, difficulty 4/10. Stages run in order; the counts below are live from your checklist.</p>
+<section id="view-missables" class="view" hidden>
+  <div class="missable-hero">
+    <h2>Possibly missable: 1 trophy</h2>
+    <p><strong>Positive Mental Attitude</strong> &mdash; meditate at every spot across Leonida. The Chapter 1 balcony meditation ends with Chapter 1; whether the trophy needs it is unconfirmed. Do it in Chapter 1 and keep a Chapter 1 save. There is no mission replay and no New Game+, and never use cheats on your trophy save.</p>
+    <p>At risk in a chapter window: <strong>4 trophies</strong>. The other 51 can be earned any time after the story.</p>
   </div>
-  <div id="roadmapStages" class="stages"></div>
-</main>
+  <h2>Disputes &mdash; shown both ways</h2>
+  <p class="lede">Where the guides disagree, we show both versions and say which one we follow.</p>
+  <div id="dispute-list"></div>
+</section>
 
-<main id="tab-missables" class="tabpage">
-  <div id="missableCards" class="missables"></div>
-  <div class="card disputes">
-    <h2>SOURCES DIFFER — DISPUTES SHOWN BOTH WAYS</h2>
-    <div id="disputeList"></div>
-  </div>
-</main>
+<section id="view-sources" class="view" hidden>
+  <h2>Sources &amp; honesty</h2>
+  <p class="lede">Every guide step in this ledger cites its sources by number, and every step is backed by at least two of them. No guide text is copied: the words are ours, the facts are checked against the sources below. Official trophy names and descriptions are shown as PlayStation publishes them.</p>
+  <ol class="source-list" id="source-list"></ol>
+  <h3>Claims per source</h3>
+  <table class="matrix" id="source-matrix">
+    <thead><tr><th>Source</th><th>Steps citing it</th><th>Guides citing it</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
 
-<main id="tab-sources" class="tabpage">
-  <div class="card">
-    <h2>SOURCES &amp; HONESTY</h2>
-    <p>Every guide step in this ledger names its sources by number — <strong>[2]</strong> means PowerPyx, and so on. No guide text is copied from any source: the words are ours, the facts are cited. Trophy names and descriptions are shown exactly as PlayStation publishes them.</p>
-    <p>Hidden flags are our call from the official descriptions: story spoilers stay hidden until earned. Counts (18 meditations, 250 stunts, 42 shooting-range challenges, 100 vehicles, 52 areas) come from the official descriptions and the cited guides; where guides disagree, the Missables tab shows both sides and our call.</p>
-    <p class="fine">Sources read 21 Nov 2026. This guide is fan-made, offline, and not affiliated with Rockstar Games or PlayStation.</p>
-  </div>
-  <div class="card">
-    <h2>SOURCE MATRIX — CLAIMS PER SOURCE</h2>
-    <table class="matrix" id="sourceMatrix">
-      <thead><tr><th>#</th><th>Source</th><th>Guide</th><th>Claims cited</th></tr></thead>
-      <tbody></tbody>
-    </table>
-  </div>
-</main>
-
-<footer class="foot">
-  <p>Leonida Ledger — fan-made GTA VI trophy guide &amp; tracker. Works offline; progress saves in this browser only. Trophy names &amp; descriptions © PlayStation / Rockstar Games, shown as published.</p>
+<footer>
+  <p>Leonida Ledger &mdash; a fan-made GTA VI trophy guide &amp; tracker. Not affiliated with Rockstar Games or PlayStation. Trophy names and descriptions as published by PlayStation. Works offline; your progress never leaves this browser unless you export it.</p>
 </footer>
-<script type="module" src="app.js"></script>
 </body>
 </html>

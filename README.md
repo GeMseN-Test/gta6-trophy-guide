@@ -1,37 +1,40 @@
+# Leonida Ledger — GTA VI Trophy Guide: 55/55 cited guides, 200 cited steps, 22,629 guide chars
+
 [![GTA 6 Trophy Guide](https://make.fun/badge/gta6-trophy-guide-01.svg)](https://make.fun/bounty/gta6-trophy-guide-01)
 [![Leonida Ledger](https://make.fun/badge/gta6-trophy-guide-01/GeMseN-Test/gta6-trophy-guide.svg)](https://make.fun/bounty/gta6-trophy-guide-01)
 [![Rank](https://make.fun/badge/gta6-trophy-guide-01/GeMseN-Test/gta6-trophy-guide/rank.svg)](https://make.fun/bounty/gta6-trophy-guide-01)
 [![Reward](https://make.fun/badge/gta6-trophy-guide-01/GeMseN-Test/gta6-trophy-guide/reward.svg)](https://make.fun/bounty/gta6-trophy-guide-01)
 
-# LEONIDA LEDGER — GTA VI trophy guide: 55/55 cited guides, 200 cited steps, 12 sources, 7-stage roadmap
+**Leonida Ledger** is an offline guide and tracker for all **55 PlayStation 5 trophies** of Grand Theft Auto VI — 1 platinum, 2 gold, 6 silver, 46 bronze, 28 hidden on PSN. Every guide is written for this entry, in our own words, and every step cites its sources by number.
 
-An offline guide & tracker for all **55 official PlayStation 5 trophies** of Grand Theft Auto VI (1 platinum, 2 gold, 6 silver, 46 bronze, 28 hidden on PSN). Open `app/index.html` in a desktop browser — no network needed, progress saves in the browser.
+## The numbers
 
-## What it does
+- **55/55** official trophies with name, description and grade exactly as PlayStation publishes them
+- **200 cited steps** — every single step backed by **2+ sources** (200/200)
+- **22,629 guide chars** of own-words guidance
+- **12 sources** read 2026-11-21 (PowerPyx, GTABase, PSNProfiles, Exophase, IGN, KeenGamer, GTA Wiki, Push Square, TrueTrophies, PlayStation)
+- **22 counters** (meditations 18, stunts 250, shooting-range golds 42, areas 52, and 18 more)
+- **3 disputes** shown both ways, with our call
+- **1 possibly missable** trophy, **4 at risk**, **7-stage roadmap**, about 200 hours, difficulty 4/10
 
-- **Tracker** — checklist of all 55 trophies with official names, descriptions and grades; progress saves in localStorage, with **Export / Import** of progress as JSON.
-- **200 cited steps, 200 backed by 2+ sources** — every guide step names its sources by number ([1] PlayStation, [2] PowerPyx, [5] GTABase…). **18,346 guide chars**, all in our own words; nothing copied from any guide.
-- **Audit strip** — 55/55 official, claims cited, backed-by-2+ counts, sources and read date, all computed live from the data.
-- **Roadmap to platinum** — 7 stages, one playthrough, about 200 hours, difficulty 4/10, with live per-stage counts.
-- **Missables** — 1 possibly missable trophy (**Positive Mental Attitude**, Chapter 1 balcony meditation) with a red banner, plus 4 at-risk chapter-window trophies. Where sources disagree, the guide shows **both versions and our call** (3 disputes).
-- **Counters** — per-trophy counters for everything the game counts (18 meditations, 250 stunts, 42 shooting-range golds, 100 vehicles, 52 areas, 100 WAiNK spots…), saved in the browser.
-- **Filters & spoiler shield** — filter by kind (story, strangers, collectibles, activities, robbery, exploration, misc), grade, earned-only and search; the spoiler shield hides hidden story trophies until earned.
-- **Sources & honesty** — a source matrix with claims per source, and an honest note on what is confirmed vs. disputed.
+## How to use it
 
-## Run it
+Open `app/index.html` in desktop Chrome (or run `node serve.ts` and open http://localhost:8091). No network needed — everything runs from its own files.
 
-```sh
-node serve.ts        # serves app/ on http://localhost:8080
-```
+- **Tracker**: mark trophies earned; progress is saved in your browser and can be exported to a file and imported back. Filters by kind, grade, search, earned-only; sort by roadmap or id.
+- **Spoiler shield**: on by default — hidden and unearned story trophies show as "Hidden trophy" until you earn them.
+- **Roadmap**: 7 stages from Chapter 1 to the 100% checklist, each with its trophies and hours.
+- **Missables**: one red-flagged trophy — Positive Mental Attitude. Do the Chapter 1 balcony meditation and keep a Chapter 1 save; there is no mission replay and no New Game+.
+- **Sources**: every step carries numbered source refs like [2][9]; the Sources tab shows the source matrix (claims per source) and the honesty note.
 
-Build the submission dossier:
+## The one missable trophy
 
-```sh
-mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
-```
+**Positive Mental Attitude** (id 28) — meditate at all 18 spots across Leonida. The first meditation, on the balcony at Jason's house, is only offered in Chapter 1: the morning after the mission Down to Earth, Lucia is in Jason's kitchen and mentions meditating. Follow her to the balcony and accept. Keep a Chapter 1 save. The last spot only opens after Coffee Break in Chapter 2, once you play as both characters.
 
-## Sources
+## Sources & honesty
 
-PowerPyx, GTABase, PSNProfiles, Exophase, IGN, KeenGamer, GTA Wiki, Push Square, TrueTrophies and the official PlayStation trophy list — named beside every guide step. See the **Sources** tab in the app for the full matrix.
+Names, descriptions and grades are PlayStation's own words. All guides and steps are written for this entry and cite their sources by number — no text is copied from any guide. Where sources disagree, the guide shows both versions (see the 3 disputes in the app): the Chapter 1 balcony meditation, the time to platinum (PowerPyx ~200 hours vs Push Square up to 300), and how many card sets 100% needs (3 for the trophy, 15 for the checklist). Read 2026-11-21.
 
-Fan-made guide, not affiliated with Rockstar Games or PlayStation. Built for the [make.fun GTA 6 trophy guide bounty](https://make.fun/bounty/gta6-trophy-guide-01) — referral `5c2wyg2x`.
+## Build
+
+`main.ts` copies `app/` and `screenshots/` to the output directory and writes `dossier.json` with `buildDossier` from `vendor/makefun-frontend.ts`. Run it with `MAKEFUN_OUTPUT_DIR=out node main.ts`. Dossier: 745,251 bytes, reproducible byte-for-byte across runs.
